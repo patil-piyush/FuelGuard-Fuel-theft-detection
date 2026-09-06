@@ -24,7 +24,7 @@ function Toggle({ label, defaultChecked = false }) {
         role="switch"
         aria-checked={checked}
         onClick={() => setChecked((c) => !c)}
-        className={`relative h-5 w-9 rounded-full transition-colors ${checked ? 'bg-amber' : 'bg-hairline'}`}
+        className={`relative h-5 w-9 rounded-full transition-colors ${checked ? 'bg-purple-500' : 'bg-hairline'}`}
       >
         <span
           className={`absolute top-0.5 h-4 w-4 rounded-full bg-ink transition-transform ${

@@ -76,13 +76,13 @@ export default function VehicleTable({ rows }) {
                   <div className="flex items-center gap-3">
                     <Link
                       to={`/vehicles/${vehicle.vehicle_id}`}
-                      className="flex items-center gap-1 text-xs text-text-dim hover:text-amber"
+                      className="flex items-center gap-1 text-xs text-text-dim hover:text-purple-300"
                     >
                       <Eye size={13} /> Details
                     </Link>
                     <Link
                       to={`/live?vehicle=${vehicle.vehicle_id}`}
-                      className="flex items-center gap-1 text-xs text-text-dim hover:text-amber"
+                      className="flex items-center gap-1 text-xs text-text-dim hover:text-purple-300"
                     >
                       <Radio size={13} /> Live
                     </Link>

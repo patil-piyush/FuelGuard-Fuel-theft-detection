@@ -50,7 +50,7 @@ export default function Events() {
               onClick={() => setTypeFilter(tab)}
               className={`rounded border px-3 py-1.5 text-xs transition-colors ${
                 typeFilter === tab
-                  ? 'border-amber/40 bg-amber-soft text-amber'
+                  ? 'border-purple/40 bg-purple-soft text-purple-500'
                   : 'border-hairline text-text-dim hover:text-text'
               }`}
             >

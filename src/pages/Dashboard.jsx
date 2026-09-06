@@ -75,81 +75,77 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6">
-        <StatCard icon={Truck} label="Total vehicles" value={totalVehicles || null} />
-        <StatCard icon={Radio} label="Online" value={onlineCount || (totalVehicles ? 0 : null)} tone="green" />
-        <StatCard
-          icon={RadioTower}
-          label="Offline"
-          value={totalVehicles ? totalVehicles - onlineCount : null}
-        />
-        <StatCard
-          icon={ShieldAlert}
-          label="Active alerts"
-          value={state.eventsTableMissing ? 0 : activeAlerts}
-          tone={activeAlerts > 0 ? 'red' : 'default'}
-        />
-        <StatCard icon={Fuel} label="Avg fuel level" value={avgFuel} unit="%" tone="amber" />
-        <StatCard icon={TrendingUp} label="Today's consumption" value={null} hint="Awaiting cloud analytics" />
-      </div>
+  {/* Primary fleet metrics */}
+  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6">
+    <StatCard icon={Truck} label="Total vehicles" value={totalVehicles || null} />
+    <StatCard icon={Radio} label="Online" value={onlineCount || (totalVehicles ? 0 : null)} tone="purple" />
+    <StatCard icon={RadioTower} label="Offline" value={totalVehicles ? totalVehicles - onlineCount : null} />
+    <StatCard icon={ShieldAlert} label="Active alerts" value={state.eventsTableMissing ? 0 : activeAlerts} tone={activeAlerts > 0 ? 'red' : 'default'} />
+    <StatCard icon={Fuel} label="Avg fuel level" value={avgFuel} unit="%" tone="purple" />
+    <StatCard icon={TrendingUp} label="Today's consumption" value={null} hint="Awaiting cloud analytics" />
+  </div>
 
-      <div className="grid grid-cols-1 gap-5 xl:grid-cols-3">
-        <div className="panel p-4 xl:col-span-2">
-          <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-sm font-medium text-text">Fuel level trend</h2>
-            <span className="text-[11px] text-text-faint">Fleet-wide, recent readings</span>
-          </div>
-          <FuelChart data={state.telemetry} />
-        </div>
-
-        <div className="panel flex flex-col p-4">
-          <div className="mb-3 flex items-center gap-2">
-            <Activity size={14} className="text-text-faint" />
-            <h2 className="text-sm font-medium text-text">Vehicle activity</h2>
-          </div>
-          {state.telemetry.length === 0 ? (
-            <EmptyState title="No recent activity" detail="Telemetry will appear here once devices report in." />
-          ) : (
-            <div className="flex flex-col divide-y divide-hairline/60">
-              {state.telemetry.slice(0, 8).map((row) => (
-                <div key={row.id ?? `${row.vehicle_id}-${row.received_at}`} className="flex items-center justify-between py-2 text-xs">
-                  <div>
-                    <p className="text-text">{row.vehicle_id}</p>
-                    <p className="text-text-faint">Telemetry received</p>
-                  </div>
-                  <span className="text-text-faint">{formatRelativeTime(row.received_at)}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div>
-        <h2 className="mb-3 text-sm font-medium text-text">Fleet overview</h2>
-        {rows.length === 0 ? (
-          <EmptyState icon={Truck} title="No vehicles found." detail="Register a vehicle in Supabase to see it here." />
-        ) : (
-          <VehicleTable rows={rows} />
-        )}
-      </div>
-
-      <div>
-        <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-sm font-medium text-text">Recent alerts</h2>
-        </div>
-        {state.events.length === 0 ? (
-          <div className="panel">
-            <EmptyState icon={ShieldAlert} title="No detected events" detail="Theft, leak, and refuel events will appear here once the detection pipeline is connected." />
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
-            {state.events.slice(0, 6).map((event) => (
-              <EventCard key={event.id} event={event} />
-            ))}
-          </div>
-        )}
-      </div>
+  {/* Fleet Health */}
+  <div className="panel p-4">
+  <div className="mb-3 flex items-center justify-between">
+    <h2 className="text-sm font-medium text-text">Fleet Health</h2>
+    <span className="text-[11px] text-text-faint">Real‑time overview</span>
+  </div>
+  <div className="flex flex-col md:flex-row gap-4">
+    <div className="flex items-center gap-2">
+      <span className="inline-block w-3 h-3 bg-green-500 rounded-full"></span>
+      <span className="text-sm font-medium text-text">Online</span>
+      <span className="text-sm text-text-faint">{onlineCount}</span>
     </div>
+    <div className="flex items-center gap-2">
+      <span className="inline-block w-3 h-3 bg-amber-500 rounded-full"></span>
+      <span className="text-sm font-medium text-text">Offline</span>
+      <span className="text-sm text-text-faint">{totalVehicles - onlineCount}</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <span className="inline-block w-3 h-3 bg-red-500 rounded-full"></span>
+      <span className="text-sm font-medium text-text">Active Alerts</span>
+      <span className="text-sm text-text-faint">{activeAlerts}</span>
+    </div>
+  </div>
+</div>
+
+  {/* Fuel Analytics */}
+  <div className="panel p-4">
+    <div className="mb-3 flex items-center justify-between">
+      <h2 className="text-sm font-medium text-text">Fuel Analytics</h2>
+      <span className="text-[11px] text-text-faint">Fuel level trend</span>
+    </div>
+    <FuelChart data={state.telemetry} />
+  </div>
+
+  {/* Vehicle Overview */}
+  <div className="panel p-4">
+    <h2 className="mb-3 text-sm font-medium text-text">Vehicle Overview</h2>
+    {rows.length === 0 ? (
+      <EmptyState icon={Truck} title="No vehicles found." detail="Register a vehicle in Supabase to see it here." />
+    ) : (
+      <VehicleTable rows={rows} />
+    )}
+  </div>
+
+  {/* Recent Events */}
+  <div className="panel p-4">
+    <div className="mb-3 flex items-center justify-between">
+      <h2 className="text-sm font-medium text-text">Recent Events</h2>
+    </div>
+    {state.events.length === 0 ? (
+      <div className="panel">
+        <EmptyState icon={ShieldAlert} title="No detected events" detail="Theft, leak, and refuel events will appear here once the detection pipeline is connected." />
+      </div>
+    ) : (
+      <div className="flex flex-col gap-3">
+        {state.events.slice(0, 6).map((event) => (
+          <EventCard key={event.id} event={event} />
+        ))}
+      </div>
+    )}
+  </div>
+</div>
   )
 }

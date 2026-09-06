@@ -35,8 +35,13 @@ export default function App() {
   const location = useLocation()
   const { title, subtitle } = metaFor(location.pathname)
 
+  const isLogin = location.pathname === '/login';
+  if (isLogin) {
+    return <Login />;
+  }
+
   return (
-    <div className="flex h-screen overflow-hidden bg-ink">
+    <div className="flex h-screen overflow-hidden bg-dashboard-bg">
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="flex min-w-0 flex-1 flex-col">
         <Header title={title} subtitle={subtitle} onMenuClick={() => setSidebarOpen(true)} />

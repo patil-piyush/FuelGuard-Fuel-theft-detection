@@ -38,9 +38,7 @@
 }
 
 @layer components {
-  .panel {
-    @apply bg-panel border border-hairline rounded shadow-panel;
-  }
+  .panel { @apply bg-white/[0.035] border border-white/10 backdrop-blur-xl rounded-2xl shadow-lg; }
   .readout {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-variant-numeric: tabular-nums;
@@ -80,5 +78,12 @@
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+@layer utilities {
+  .bg-dashboard-bg {
+    @apply bg-gradient-to-b from-gray-900 to-black;
+    /* faint purple ambient overlay */
+    background-image: linear-gradient(to bottom, rgba(31,31,33,0.1), rgba(0,0,0,0)), linear-gradient(to bottom, rgba(111,45,195,0.05), transparent);
   }
 }

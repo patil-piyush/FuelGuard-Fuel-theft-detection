@@ -57,7 +57,7 @@ export default function VehicleDetails() {
 
   return (
     <div className="flex flex-col gap-5">
-      <Link to="/vehicles" className="flex w-fit items-center gap-1.5 text-xs text-text-dim hover:text-amber">
+      <Link to="/vehicles" className="flex w-fit items-center gap-1.5 text-xs text-text-dim hover:text-purple-400">
         <ArrowLeft size={13} /> Back to vehicles
       </Link>
 
@@ -72,7 +72,7 @@ export default function VehicleDetails() {
       </div>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-5">
-        <StatCard icon={Fuel} label="Current fuel" value={latest ? formatFuel(latest.fuel_level) ?? 'Pending' : 'N/A'} tone="amber" />
+        <StatCard icon={Fuel} label="Current fuel" value={latest ? formatFuel(latest.fuel_level) ?? 'Pending' : 'N/A'} tone="purple" />
         <StatCard icon={Gauge} label="Current speed" value={latest ? formatSpeed(latest.speed_kmph) : 'N/A'} />
         <StatCard icon={Ruler} label="Distance reading" value={latest ? formatDistance(latest.distance_cm) : 'N/A'} />
         <StatCard icon={MapPin} label="GPS status" value={gpsOk ? 'Connected' : 'Unavailable'} tone={gpsOk ? 'green' : 'default'} />

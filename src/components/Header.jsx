@@ -3,7 +3,7 @@ import { isSupabaseConfigured } from '../lib/supabase'
 
 export default function Header({ title, subtitle, onMenuClick }) {
   return (
-    <header className="sticky top-0 z-20 flex h-14 shrink-0 items-center gap-3 border-b border-hairline bg-ink/95 px-4 backdrop-blur">
+    <header className="sticky top-0 z-20 flex h-14 shrink-0 items-center gap-3 border-b border-white/10 bg-black/20 backdrop-blur-xl px-4">
       <button
         onClick={onMenuClick}
         className="text-text-dim lg:hidden"
@@ -39,7 +39,7 @@ export default function Header({ title, subtitle, onMenuClick }) {
         <span className="text-text-dim">{isSupabaseConfigured ? 'System online' : 'Not connected'}</span>
       </div>
 
-      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-panel-raised text-xs font-semibold text-amber">
+      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-panel-raised text-xs font-semibold text-purple-500">
         A
       </div>
     </header>

@@ -3,7 +3,7 @@ import { formatClockTime, formatCoords } from '../lib/format'
 
 const EVENT_META = {
   NORMAL: { icon: CircleCheck, color: 'text-signal-green', border: 'border-l-signal-green', label: 'Normal' },
-  REFUEL: { icon: Fuel, color: 'text-signal-blue', border: 'border-l-signal-blue', label: 'Refuel' },
+  REFUEL: { icon: Fuel, color: 'text-purple-500', border: 'border-l-purple-500', label: 'Refuel' },
   LEAK: { icon: Droplet, color: 'text-amber', border: 'border-l-amber', label: 'Leak detected' },
   THEFT: { icon: ShieldAlert, color: 'text-signal-red', border: 'border-l-signal-red', label: 'Theft detected' },
 }
