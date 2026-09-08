@@ -7,3 +7,9 @@ dist/
 !.env.example
 
 *.log
+
+# PlatformIO
+.pio/
+
+# VS Code
+.vscode/
