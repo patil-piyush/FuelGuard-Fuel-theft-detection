@@ -33,11 +33,11 @@ pd.set_option("display.width", 140)
 # ---------------------------------------------------------------
 # Step 2: run the edge firmware simulation (IIR filter + write Supabase csv)
 # ---------------------------------------------------------------
-subprocess.run(["python3", "edge_firmware.py"], check=True, cwd="/home/claude/sim")
+subprocess.run(["python3", "edge_firmware.py"], check=True, cwd="./")
 
-telemetry = pd.read_csv("/home/claude/sim/supabase_telemetry.csv",
+telemetry = pd.read_csv("./supabase_telemetry.csv",
                          parse_dates=["timestamp", "received_at"])
-debug = pd.read_csv("/home/claude/sim/supabase_telemetry_debug.csv",
+debug = pd.read_csv("./supabase_telemetry_debug.csv",
                      parse_dates=["timestamp", "received_at"])
 
 # ---------------------------------------------------------------
@@ -171,7 +171,7 @@ summary = {
     "events_detected": events.to_dict(orient="records") if len(events) else [],
     "ground_truth_events": [{"label": e["label"], "start_s": e["start"], "end_s": e["end"]} for e in gt_events],
 }
-with open("/home/claude/sim/results_summary.json", "w") as f:
+with open("./results_summary.json", "w") as f:
     json.dump(summary, f, indent=2, default=str)
 print("\nSaved -> results_summary.json")
 
@@ -217,7 +217,7 @@ ax.set_title("Detected theft flags: naive baseline vs. cloud_algo", fontsize=11,
 ax.legend(loc="upper right", fontsize=8)
 
 plt.tight_layout()
-plt.savefig("/home/claude/sim/fig_trip_overview.png", dpi=170, facecolor="white")
+plt.savefig("./fig_trip_overview.png", dpi=170, facecolor="white")
 print("Saved -> fig_trip_overview.png")
 
 # Zoomed plot around Theft event 1
@@ -232,5 +232,5 @@ ax2.set_ylabel("Fuel (L)")
 ax2.set_title("Zoom: Theft Event 1 -- sloshing noise vs. edge-filtered signal", color=NAVY)
 ax2.legend(fontsize=9)
 plt.tight_layout()
-plt.savefig("/home/claude/sim/fig_theft_zoom.png", dpi=170, facecolor="white")
+plt.savefig("./fig_theft_zoom.png", dpi=170, facecolor="white")
 print("Saved -> fig_theft_zoom.png")

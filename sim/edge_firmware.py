@@ -24,7 +24,7 @@ from pipeline import iir_filter
 
 rng = np.random.default_rng(7)
 
-raw = pd.read_csv("/home/claude/sim/sim_raw_data.csv", parse_dates=["timestamp"])
+raw = pd.read_csv("./sim_raw_data.csv", parse_dates=["timestamp"])
 
 # ---- On-ESP32 processing: IIR filter the raw fuel signal -----------------
 # This is the only transformation edge computing performs. distance_cm is
@@ -48,11 +48,11 @@ raw = raw[keep & blackout].reset_index(drop=True)
 # ---- Write the real Supabase-schema table ---------------------------------
 supabase_cols = ["device_id", "fuel_level", "distance_cm", "latitude",
                   "longitude", "speed_kmph", "timestamp", "received_at"]
-raw[supabase_cols].to_csv("/home/claude/sim/supabase_telemetry.csv", index=False)
+raw[supabase_cols].to_csv("./supabase_telemetry.csv", index=False)
 
 # ---- Debug copy for scoring the simulation (keeps ground truth) ----------
 debug_cols = supabase_cols + ["fuel_gt_L", "fuel_raw_L", "event_label", "t_s"]
-raw[debug_cols].to_csv("/home/claude/sim/supabase_telemetry_debug.csv", index=False)
+raw[debug_cols].to_csv("./supabase_telemetry_debug.csv", index=False)
 
 print(f"Rows written: {len(raw)} (dropped {n_before - len(raw)} for packet loss/blackout)")
 print("Saved -> supabase_telemetry.csv   (real schema, what actually reaches Supabase)")

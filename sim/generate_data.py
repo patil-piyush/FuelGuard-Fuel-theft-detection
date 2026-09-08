@@ -180,7 +180,7 @@ df = pd.DataFrame({
 TANK_HEIGHT_CM = 120.0
 df["distance_cm"] = np.clip(TANK_HEIGHT_CM * (1 - df["fuel_raw_L"] / TANK_CAPACITY_L), 0, TANK_HEIGHT_CM)
 
-df.to_csv("/home/claude/sim/sim_raw_data.csv", index=False)
+df.to_csv("./sim_raw_data.csv", index=False)
 print("Rows:", len(df))
 print(df["event_label"].value_counts())
 print("Saved -> sim_raw_data.csv")
